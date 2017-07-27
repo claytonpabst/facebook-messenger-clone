@@ -11,8 +11,15 @@ This is a fully functional basic React app seed. It comes with Redux already set
 #### Should look something like this
 ```javascript
 module.exports = {
-  secret: "werlhkh4345^%#%lijlskdjre45hlkhjsir3$%^",
-  connectionString: "Your DB connection string goes here", 
+  secret: "aetbmjljfcbn!%$*$nkrlhlkhnannalvlwher#$%66345nlk",
+  connection: {
+    host: //host (you'll find this info in your heroku db),
+    port: //port,
+    database: //database,
+    user: //user,
+    password: //password
+    ssl: true
+  },
   port: 3000
 };
 ```
