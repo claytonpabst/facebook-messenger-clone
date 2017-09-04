@@ -11,7 +11,6 @@ This is a fully functional basic React app seed. It comes with Redux already set
 #### Should look something like this
 ```javascript
 module.exports = {
-module.exports = {
   secret: "aetbmjljfcbn!%$*$nkrlhlkhnannalvlwher#$%66345nlk",
   connection: {
     host: //host (you'll find this info in your heroku db credentials),
@@ -22,7 +21,6 @@ module.exports = {
     ssl: true
   },
   port: 8000
-};
 };
 ```
 Note - Having the backend run on port 8000 allows npm start to run on port 3000 at the same time. This allows you to build your front end using npm start, while the backend will still respond to local api calls.
