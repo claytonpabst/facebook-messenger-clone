@@ -20,7 +20,6 @@ class Home extends Component {
       timestamp 
     }));
 
-
     //bind me
   }
 
