@@ -6,6 +6,17 @@ var session = require('express-session');
 var config = require('./config.js');
 
 const app = module.exports = express();
+var server = require('http').createServer(app);
+const io = require('socket.io')();
+
+io.on('connection', (client) => {
+  client.on('subscribeToTimer', (interval) => {
+    console.log('client is subscribing to timer with interval ', interval);
+      setInterval(() => {
+        client.emit('timer', new Date());
+      }, interval);
+  });
+});
 
 app.use(bodyParser.json());
 app.use(session({
@@ -30,5 +41,6 @@ var userController = require("./userController.js");
 
 
 
-
-app.listen(config.port, console.log("you are now connected on " + config.port));
+io.listen(config.port);
+console.log("listening on port:" + config.port);
+// server.listen(config.port, console.log("you are now connected on " + config.port));

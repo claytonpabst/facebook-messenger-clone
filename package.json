@@ -9,13 +9,16 @@
     "cors": "^2.8.3",
     "express": "^4.15.3",
     "express-session": "^1.15.3",
+    "http": "0.0.0",
     "massive": "^3.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "redux": "^3.7.1",
-    "redux-promise-middleware": "^4.3.0"
+    "redux-promise-middleware": "^4.3.0",
+    "socket.io": "^2.0.4",
+    "socket.io-client": "^2.0.4"
   },
   "devDependencies": {
     "react-scripts": "1.0.10"
