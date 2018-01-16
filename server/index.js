@@ -6,6 +6,12 @@ var session = require('express-session');
 var config = require('./config.js');
 
 const app = module.exports = express();
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+
+io.on('connection', function(){ 
+  console.log('testing connection');
+});
 
 app.use(bodyParser.json());
 app.use(session({
@@ -31,4 +37,4 @@ var userController = require("./userController.js");
 
 
 
-app.listen(config.port, console.log("you are now connected on " + config.port));
+server.listen(config.port, console.log("you are now connected on " + config.port));
