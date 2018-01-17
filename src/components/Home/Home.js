@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import openSocket from 'socket.io-client';
 import './Home.css';
 
+import Header from './../Header/Header.js';
+
 
 class Home extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    
+
     this.state = {
       text: "Home Page",
       timestamp: "no timestamp yet"
@@ -15,7 +17,7 @@ class Home extends Component {
     //bind me
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.subscribeToTimer(2000, (err, timestamp) => {
       this.setState({
         timestamp: timestamp
@@ -27,14 +29,15 @@ class Home extends Component {
     const socket = openSocket('http://localhost:8085');
     socket.on('timer', timestamp => cb(null, timestamp));
     socket.emit('subscribeToTimer', interval);
-  } 
+  }
 
   render() {
     return (
       <div className="home">
 
-          {this.state.text}
-          <p>{this.state.timestamp}</p>
+        <Header />
+        {this.state.text}
+        <p>{this.state.timestamp}</p>
 
       </div>
     );

@@ -1,0 +1,127 @@
+.header{
+    width: 100%;
+    height: 45px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: #4267b2;
+}
+
+.header_inner{
+    width: 90%;
+    max-width: 1000px;
+    height: 35px;
+    line-height: 45px;
+    position: relative;
+    margin: 5px auto;
+}
+
+.facebook_search_container{
+    width: 500px;
+    height: 35px;
+    display: inline-block;
+}
+
+.facebook_logo_wrapper{
+    width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 2px;
+    position: absolute;
+    left: 0px;
+    top: 4px;
+}
+
+.facebook_logo{
+    width: auto;
+    height: 38px;
+    position: absolute;
+    left: -4px;
+    top: -5px;
+}
+
+.header_search{
+    width: 400px;
+    height: 20px;
+    line-height: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    position: absolute;
+    left: 30px;
+    top: 5px;
+    border: none;
+    border-radius: 3px;
+}
+
+.header_search_btn{
+    width: 40px;
+    height: 22px;
+    background: #eee;
+    position: absolute;
+    left: 430px;
+    top: 5px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    cursor: pointer;
+}
+
+.header_search_btn_icon{
+    height: 20px;
+    width: auto;
+    position: absolute;
+    left: 13px;
+    top: 1px;
+}
+
+.header_controls_wrapper{
+    width: 420px;
+    height: 35px;
+    margin-left: 50px;
+    display: inline-block;
+    align-content: top;
+    overflow: hidden;
+    position: relative;
+}
+
+.header_navlist{
+    width: 240px;
+    position: absolute;
+    left: 0px;
+    top: 3px;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.header_navlist li{
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    padding: 0px 6px;
+    cursor: pointer;
+    border-radius: 2px;
+    float: left;
+}
+
+.header_navlist li:hover{
+    background: #365899;
+}
+
+.header_thumbnail{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    position: absolute;
+    left: 6px;
+    top: 2.5px;
+}
+
+.header_username{
+    position: relative;
+    padding-left: 28px;
+}
+
+.header_navlist_home{
+    border-right: 1px solid #365899;
+    border-left: 1px solid #365899;
+}
