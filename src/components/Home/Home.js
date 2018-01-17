@@ -1,41 +1,43 @@
 import React, { Component } from 'react';
-import io from "socket.io";
-import { subscribeToTimer } from './../../api.js';
-
+import openSocket from 'socket.io-client';
 import './Home.css';
+
+import Header from './../Header/Header.js';
 
 
 class Home extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    
+
     this.state = {
       text: "Home Page",
       timestamp: "no timestamp yet"
     }
 
-
-
-    subscribeToTimer(2000,(err, timestamp) => this.setState({ 
-      timestamp 
-    }));
-
     //bind me
   }
 
-  // componentDidMount(){
-  //   var socket = io.connect('http://127.0.0.1:8000');
-  //   socket.on('connect', function(data) {
-  //     socket.emit('join', 'Hello World from client');
-  //   });
-  // }
+  componentDidMount() {
+    this.subscribeToTimer(2000, (err, timestamp) => {
+      this.setState({
+        timestamp: timestamp
+      })
+    })
+  }
+
+  subscribeToTimer(interval, cb) {
+    const socket = openSocket('http://localhost:8085');
+    socket.on('timer', timestamp => cb(null, timestamp));
+    socket.emit('subscribeToTimer', interval);
+  }
 
   render() {
     return (
       <div className="home">
 
-          {this.state.text}
-          {this.state.timestamp}
+        <Header />
+        {this.state.text}
+        <p>{this.state.timestamp}</p>
 
       </div>
     );
