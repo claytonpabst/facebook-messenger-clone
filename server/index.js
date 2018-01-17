@@ -7,7 +7,8 @@ var config = require('./config.js');
 
 const app = module.exports = express();
 var server = require('http').createServer(app);
-const io = require('socket.io')();
+const io = require('socket.io')(server, { origins: '*:*'});
+
 
 io.on('connection', (client) => {
   client.on('subscribeToTimer', (interval) => {
@@ -24,7 +25,7 @@ app.use(session({
   resave: true,
   saveUninitialized: false,
   cookie:{
-    maxAge: (1000*60*60*24*14) //this is 14 days
+    maxAge: (1000*60*60*24*14) 
   }
 }))
 
@@ -43,4 +44,3 @@ var userController = require("./userController.js");
 
 io.listen(config.port);
 console.log("listening on port:" + config.port);
-// server.listen(config.port, console.log("you are now connected on " + config.port));
