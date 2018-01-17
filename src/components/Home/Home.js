@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import openSocket from 'socket.io-client';
-import { subscribeToTimer } from './../../api.js';
 import './Home.css';
 
 
@@ -12,7 +11,7 @@ class Home extends Component {
       text: "Home Page",
       timestamp: "no timestamp yet"
     }
-    
+
     //bind me
   }
 
