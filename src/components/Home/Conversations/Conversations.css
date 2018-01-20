@@ -1,6 +1,6 @@
 .conversations{
     width: 25%;
-    min-height: 100vh;
+    height: calc(100vh - 95px);
     position: relative;
     float: left;
 }
