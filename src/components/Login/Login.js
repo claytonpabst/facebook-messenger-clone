@@ -10,6 +10,8 @@ class Login extends Component {
     this.state = {
         loginEmail:'',
         loginPassword:'',
+        firstName:'',
+        lastName:'',
         signupEmail:'',
         signupEmailConfirmation:'',
         signupPassword:'',
@@ -19,11 +21,18 @@ class Login extends Component {
     this.loginButtonPressed = this.loginButtonPressed.bind(this);
   }
 
+  handleInput(e, variable){
+    this.setState({
+      [variable]:e.target.value
+    })
+  }
+
   loginButtonPressed(){
 
   }
 
   render() {
+    console.log(this.state);
     return (
       <section className='login_page'>
         <header className='login_header'>
@@ -33,11 +42,11 @@ class Login extends Component {
           <div style={{"paddingLeft":"100px"}}>
             <span>
               <h6>Email</h6>
-              <input placeholder="email" value={this.state.loginEmail} onChange={(e) => this.setState({ loginEmail: e.target.value })} type="text"/>  
+              <input placeholder="Email" value={this.state.loginEmail} onChange={(e) => this.setState({ loginEmail: e.target.value })} type="text"/>  
             </span>
             <span>
               <h6>Password</h6>
-              <input placeholder="password" value={this.state.loginPassword} onChange={(e) => this.setState({ loginPassword: e.target.value })} type="text"/>  
+              <input placeholder="Password" value={this.state.loginPassword} onChange={(e) => this.setState({ loginPassword: e.target.value })} type="text"/>  
             </span>
             <button onClick={this.loginButtonPressed}>Log In</button>
           </div>
@@ -45,10 +54,17 @@ class Login extends Component {
         <div className="login_create_account_wrapper">
           <h1>Create a New Account</h1>
           <h1>It's free and always will be.</h1>
-          <input type="text"/>
-          <input type="text"/>
-          <input type="text"/>
-          <input type="text"/>
+          <input placeholder="First Name" value={this.state.firstName} onChange={(e) => this.handleInput(e,"firstName")} type="text"/>
+          <input placeholder="Last Name" value={this.state.lastName} onChange={(e) => this.handleInput(e,"lastName")} type="text"/>
+          <br/>
+          <input style={{"width":"425px"}} placeholder="Email" value={this.state.signupEmail} onChange={(e) => this.handleInput(e,"signupEmail")} type="text"/>
+          <br/>
+          <input style={{"width":"425px"}} placeholder="Confirm Email" value={this.state.signupEmailConfirmation} onChange={(e) => this.handleInput(e,"signupEmailConfirmation")} type="text"/>
+          <br/>
+          <input style={{"width":"425px"}} placeholder="Password" value={this.state.signupPassword} onChange={(e) => this.handleInput(e,"signupPassword")} type="text"/>
+          <br/>
+          <input style={{"width":"425px"}} placeholder="Confirm Password" value={this.state.signupPasswordConfirmation} onChange={(e) => this.handleInput(e,"signupPasswordConfirmation")} type="text"/>
+          <button>Create Account</button>
         </div>
       </section>
     );

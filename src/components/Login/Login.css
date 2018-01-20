@@ -2,6 +2,7 @@
     width: 100%;
     min-height: 100vh;
     position: relative;
+    background: lightgray;
 }
 .login_header{
     width:100%;
@@ -48,13 +49,14 @@
 }
 .login_header button:hover{
     background: #063b74;
+    cursor: pointer;
 }
 
 .login_create_account_wrapper{
     width: 500px;
     min-height: 500px;
     margin: auto;
-    background:orange;
+    /* background:orange; */
 }
 .login_create_account_wrapper h1:nth-child(1){
     font-size: 36px;
@@ -65,4 +67,26 @@
 .login_create_account_wrapper h1:nth-child(2){
     font-size: 20px;
     padding: 5px;
+}
+.login_create_account_wrapper input{
+    height: 30px;
+    width:200px;
+    font-size: 23px;
+    margin:10px 10px 0px 3px;
+    padding-left: 6px;
+    border-radius: 5px;
+}
+.login_create_account_wrapper button{
+    height: 40px;
+    width:150px;
+    font-size: 18px;
+    margin:10px 10px 0px 3px;
+    padding-left: 6px;
+    border-radius: 5px;
+    background: #317414;
+    color: white;
+}
+.login_create_account_wrapper button:hover{
+    background: #3d8a1c;
+    cursor: pointer;   
 }
