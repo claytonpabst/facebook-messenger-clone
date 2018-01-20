@@ -44,8 +44,14 @@ class CurrentConversation extends Component {
       <section className='current_conversation'>
 
         <div className='conversation_wrapper'>
-          <div className='correspondent_info'>
-            {/* This is where the other person info will go, their picture, their name, their Facebook info, etc */}
+          <div className='correspondent_info_wrapper'>
+            <img src='https://scontent-lax3-1.xx.fbcdn.net/v/t1.0-1/p50x50/20106655_771138229724477_2770561463904245587_n.jpg?oh=113b7dd649105f48177516849be07701&oe=5AF5D52F' alt='correspondent thumbnail' className='correspondent_thumbnail' />
+            <div className='correspondent_info'>
+              <h2>Clayton Pabst</h2>
+              <h4>You're friends on Facebook</h4>
+              <p>New Look Pro Studios</p>
+              <p>Lives in Syracuse, Utah</p>
+            </div>
           </div>
 
           <div className='messages'>

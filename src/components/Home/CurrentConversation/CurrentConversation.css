@@ -14,10 +14,42 @@
     overflow-y: none;
 }
 
-.correspondent_info{
+.correspondent_info_wrapper{
     width: 100%;
     height: 80px;
+    padding-left: 10px;
     border-bottom: 0.5px solid #ccc;
+}
+
+.correspondent_thumbnail{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    float: left;
+}
+
+.correspondent_info{
+    margin-left: 60px;
+    padding-left: 10px;
+}
+
+.correspondent_info h2{
+    margin: 5px 0px;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.correspondent_info h4{
+    margin: 5px 0px;
+    font-size: 11px;
+    font-weight: normal;
+}
+
+.correspondent_info p{
+    margin: 5px 0px;
+    font-size: 10px;
+    font-weight: normal;
+    color: #ccc;
 }
 
 .messages{
