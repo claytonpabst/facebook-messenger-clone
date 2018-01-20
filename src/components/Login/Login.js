@@ -8,17 +8,19 @@ class Login extends Component {
   constructor(props){
     super(props);
     this.state = {
-      login:{
-        email:'',
-        password:''
-      },
-      signup:{
-        email:'',
-        emailConfirmation:'',
-        password:'',
-        passwordConfirmation:''
-      }
+        loginEmail:'',
+        loginPassword:'',
+        signupEmail:'',
+        signupEmailConfirmation:'',
+        signupPassword:'',
+        signupPasswordConfirmation:''
     }
+
+    this.loginButtonPressed = this.loginButtonPressed.bind(this);
+  }
+
+  loginButtonPressed(){
+
   }
 
   render() {
@@ -31,13 +33,13 @@ class Login extends Component {
           <div style={{"paddingLeft":"100px"}}>
             <span>
               <h6>Email</h6>
-              <input type="text"/>  
+              <input placeholder="email" value={this.state.loginEmail} onChange={(e) => this.setState({ loginEmail: e.target.value })} type="text"/>  
             </span>
             <span>
               <h6>Password</h6>
-              <input type="text"/>  
+              <input placeholder="password" value={this.state.loginPassword} onChange={(e) => this.setState({ loginPassword: e.target.value })} type="text"/>  
             </span>
-            <button>Log In</button>
+            <button onClick={this.loginButtonPressed}>Log In</button>
           </div>
         </header>
         <div className="login_create_account_wrapper">
