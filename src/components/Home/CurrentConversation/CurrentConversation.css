@@ -1,8 +1,98 @@
 .current_conversation{
     width: 50%;
-    min-height: 100vh;
+    height: calc(100vh - 95px);
     position: relative;
     border-right: 1px solid #ccc;
     border-left: 1px solid #ccc;
     float: left;
+    padding: 10px 20px 10px 10px;
+}
+
+.conversation_wrapper{
+    width: 100%;
+    height: calc(100% - 50px);
+    overflow-y: none;
+}
+
+.correspondent_info_wrapper{
+    width: 100%;
+    height: 80px;
+    padding-left: 10px;
+    border-bottom: 0.5px solid #ccc;
+}
+
+.correspondent_thumbnail{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    float: left;
+}
+
+.correspondent_info{
+    margin-left: 60px;
+    padding-left: 10px;
+}
+
+.correspondent_info h2{
+    margin: 5px 0px;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.correspondent_info h4{
+    margin: 5px 0px;
+    font-size: 11px;
+    font-weight: normal;
+}
+
+.correspondent_info p{
+    margin: 5px 0px;
+    font-size: 10px;
+    font-weight: normal;
+    color: #ccc;
+}
+
+.messages{
+    padding-top: 20px;
+}
+
+.message{
+    width: 100%;
+    height: auto;
+    position: relative;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.float_spacer{
+    height: 100%;
+    clear: both;
+    margin-bottom: 2px;
+}
+
+.message p{
+    max-width: 300px;
+    padding: 6px 10px;
+    border-radius: 14px;
+}
+
+.new_message_wrapper{
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    border-top: 1px solid #ccc;
+}
+
+.new_message_input{
+    width: 500px;
+    height: 30px;
+    resize: none;
+    border: none;
+    font-size: 14px;
+    line-height: 20px;
+    position: absolute;
+    top: 10px;
+    left: 5px;
 }
