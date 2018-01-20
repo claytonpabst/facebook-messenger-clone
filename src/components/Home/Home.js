@@ -3,6 +3,10 @@ import openSocket from 'socket.io-client';
 import './Home.css';
 
 import Header from './../Header/Header.js';
+import HomeHeader from './HomeHeader/HomeHeader.js';
+import Conversations from './Conversations/Conversations.js';
+import CurrentConversation from './CurrentConversation/CurrentConversation.js';
+import ConversationOptions from './ConversationOptions/ConversationOptions.js';
 
 
 class Home extends Component {
@@ -36,8 +40,12 @@ class Home extends Component {
       <div className="home">
 
         <Header />
-        {this.state.text}
-        <p>{this.state.timestamp}</p>
+        <HomeHeader />
+        <Conversations />
+        <CurrentConversation />
+        <ConversationOptions />
+        {/* {this.state.text}
+        <p>{this.state.timestamp}</p> */}
 
       </div>
     );
