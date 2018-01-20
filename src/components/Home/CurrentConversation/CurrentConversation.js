@@ -7,6 +7,7 @@ class CurrentConversation extends Component {
     super(props);
 
     this.state = {
+      userInput: '',
       messages: [
         {
           correspondent: 'Clayton Pabst', 
@@ -19,7 +20,14 @@ class CurrentConversation extends Component {
           correspondent: 'Clayton Pabst', 
           fromCorrespondent: false, 
           toCorrespondent: true,
-          message: 'What up homie',
+          message: 'hey',
+          date: 'Sat 01/20/2018 14:26:01 MST'
+        },
+        {
+          correspondent: 'Clayton Pabst', 
+          fromCorrespondent: false, 
+          toCorrespondent: true,
+          message: 'new one',
           date: 'Sat 01/20/2018 14:26:01 MST'
         },
       ],
@@ -28,7 +36,7 @@ class CurrentConversation extends Component {
   }
 
   componentDidMount(){
-    //axios to get current conversation from DB
+    //axios to get current conversation from DB and save it to state
   }
 
   render() {
@@ -48,7 +56,7 @@ class CurrentConversation extends Component {
                 : {float: 'right', clear: 'right', color: 'white', background: '#0084ff'};
                 return (
                   <div className='message'>
-                    <div style={{clear: 'both'}}></div>
+                    <div className='float_spacer' ></div>
                     <p style={style}>{item.message}</p>
                   </div>
                 )
@@ -57,8 +65,8 @@ class CurrentConversation extends Component {
           </div>
         </div>
 
-        <div className='new_message_input'>
-
+        <div className='new_message_wrapper'>
+          <textarea className='new_message_input' value={this.state.userInput} onChange={(e) => this.setState({userInput: e.target.value})} placeholder='Type a message...' />
         </div>
 
       </section>
