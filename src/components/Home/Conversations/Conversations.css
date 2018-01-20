@@ -1,0 +1,6 @@
+.conversations{
+    width: 25%;
+    min-height: 100vh;
+    position: relative;
+    float: left;
+}

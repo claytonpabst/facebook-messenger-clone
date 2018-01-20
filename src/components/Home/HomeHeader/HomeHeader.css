@@ -1,0 +1,64 @@
+
+.homeheader{
+    width: 100%;
+    height: 50px;
+    position: relative;
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+}
+
+.conversations_header{
+    width: 25%;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    float: left;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 5px;
+}
+
+.homeheader_icon{
+    width: auto;
+    height: 30px;
+    cursor: pointer;
+}
+
+.current_conversation_header{
+    width: 75%;
+    height: 50px;
+    display: inline-block;
+    border-left: 1px solid #ccc;
+    position: relative;
+}
+
+.current_conversation_person{
+    width: 60%;
+    margin-left: 20%;
+    text-align: center;
+    padding-top: 10px;
+    font-size: 13px;
+}
+
+.current_conversation_icons_wrapper{
+    width: 140px;
+    height: 50px;
+    position: absolute;
+    right: 10px;
+    top: 0px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.homeheader svg{
+    clip-rule: evenodd;
+    fill: none;
+    fill-rule: evenodd;
+    stroke: rgb(0, 132, 255);
+    stroke-miterlimit: 10;
+    stroke-width: 2;
+    transform: scale(0.5);
+}
+
