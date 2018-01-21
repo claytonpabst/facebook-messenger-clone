@@ -46,7 +46,7 @@ class CurrentConversation extends Component {
   sendNewMessage(e){
     //This will eventually send to the db and then request an update to the conversation.
     let key = e.keyCode || e.which;
-    if(key === 13){
+    if(key === 13 && this.state.userInput !== ''){
       let messages = [...this.state.messages];
       messages.push({
         correspondent: 'Clayton Pabst',
@@ -104,7 +104,7 @@ class CurrentConversation extends Component {
         </div>
 
         <form className='new_message_wrapper'>
-          <textarea className='new_message_input' value={this.state.userInput} onKeyDown={this.sendNewMessage} onChange={(e) => this.setState({userInput: e.target.value})} placeholder='Type a message...' />
+          <textarea id='new_message_input' className='new_message_input' value={this.state.userInput} onKeyDown={this.sendNewMessage} onChange={(e) => this.setState({userInput: e.target.value})} placeholder='Type a message...' />
         </form>
 
       </section>
