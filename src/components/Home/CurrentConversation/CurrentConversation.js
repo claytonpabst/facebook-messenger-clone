@@ -40,6 +40,26 @@ class CurrentConversation extends Component {
       ],
     }
 
+    this.sendNewMessage = this.sendNewMessage.bind(this);
+  }
+
+  sendNewMessage(e){
+    //This will eventually send to the db and then request an update to the conversation.
+    let key = e.keyCode || e.which;
+    if(key === 13 && this.state.userInput !== ''){
+      let messages = [...this.state.messages];
+      messages.push({
+        correspondent: 'Clayton Pabst',
+        fromCorrespondent: false,
+        toCorrespondent: true,
+        message:this.state.userInput,
+        date: new Date()
+      });
+      this.setState({
+        userInput:'',
+        messages:messages
+      });
+    }
   }
 
   componentDidMount(){
@@ -51,6 +71,19 @@ class CurrentConversation extends Component {
   }
 
   render() {
+
+    let messages =this.state.messages.map( (item, i) => {
+      let style = item.fromCorrespondent ? 
+          {float: 'left', clear: 'left', color: 'black', background: '#ccc'} 
+        : {float: 'right', clear: 'right', color: 'white', background: '#0084ff'};
+        return (
+          <div className='message' key={i}>
+            <div className='float_spacer' ></div>
+            <p style={style}>{item.message}</p>
+          </div>
+        )
+      })
+
     return (
       <section className='current_conversation'>
 
@@ -66,25 +99,13 @@ class CurrentConversation extends Component {
           </div>
 
           <div className='messages'>
-            {
-              this.state.messages.map( (item, i) => {
-                let style = item.fromCorrespondent ? 
-                  {float: 'left', clear: 'left', color: 'black', background: '#ccc'} 
-                : {float: 'right', clear: 'right', color: 'white', background: '#0084ff'};
-                return (
-                  <div className='message'>
-                    <div className='float_spacer' ></div>
-                    <p style={style}>{item.message}</p>
-                  </div>
-                )
-              })
-            }
+            {messages}
           </div>
         </div>
 
-        <div className='new_message_wrapper'>
-          <textarea className='new_message_input' value={this.state.userInput} onChange={(e) => this.setState({userInput: e.target.value})} placeholder='Type a message...' />
-        </div>
+        <form className='new_message_wrapper'>
+          <textarea id='new_message_input' className='new_message_input' value={this.state.userInput} onKeyDown={this.sendNewMessage} onChange={(e) => this.setState({userInput: e.target.value})} placeholder='Type a message...' />
+        </form>
 
       </section>
     );
