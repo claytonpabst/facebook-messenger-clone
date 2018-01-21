@@ -72,7 +72,7 @@ class CurrentConversation extends Component {
 
   render() {
 
-    let messages = this.state.messages.map( (item, i) => {
+    let messages =this.state.messages.map( (item, i) => {
       let style = item.fromCorrespondent ? 
           {float: 'left', clear: 'left', color: 'black', background: '#ccc'} 
         : {float: 'right', clear: 'right', color: 'white', background: '#0084ff'};
