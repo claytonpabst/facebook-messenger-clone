@@ -59,6 +59,30 @@ module.exports = {
         console.log(err);
         return res.status(200).send(err);
       });
+  },
+
+  addNewMessage: function(req, res){
+
+    if (!req.session.user){
+      return res.status(200).send({message: 'Must be logged in to use this page'});
+    }
+    
+    const db = req.app.get('db');
+    let conversationid = req.session.user.id + ':' + req.body.correspondentid;
+    let correspondent = req.body.correspondentfirstname + ' ' + req.body.correspondentlastname;
+    db.addNewMessageUserTables([req.session.user.id, 
+                                req.body.correspondentid, 
+                                correspondent, 
+                                req.body.message,
+                                conversationid,
+                                false])
+      .then(response => {
+        return res.status(200).send(response)
+      })
+      .catch(err => {
+        console.log(err);
+        return res.status(200).send(err);
+      });
   }
 
 };
