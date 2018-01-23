@@ -17,7 +17,8 @@ class Home extends Component {
     this.state = {
       isLoggedIn: false,
       text: "Home Page",
-      timestamp: "no timestamp yet"
+      timestamp: "no timestamp yet",
+      user: {},
     }
 
     //bind me
@@ -29,7 +30,8 @@ class Home extends Component {
       console.log(res);
       if (res.data.isLoggedIn){
         this.setState({
-          isLoggedIn: true
+          isLoggedIn: true,
+          user: res.data
         })
         // socket stuff
         // this.subscribeToTimer(2000, (err, timestamp) => {
@@ -64,11 +66,11 @@ class Home extends Component {
         {
           this.state.isLoggedIn ? 
             <div>
-              <Header />
-              <HomeHeader />
-              <Conversations />
-              <CurrentConversation />
-              <ConversationOptions />
+              <Header user={this.state.user} />
+              <HomeHeader user={this.state.user} />
+              <Conversations user={this.state.user} />
+              <CurrentConversation user={this.state.user} />
+              <ConversationOptions user={this.state.user} />
             </div>
           : <div style={{fontSize: '30px'}}>Loading....</div>
         }
