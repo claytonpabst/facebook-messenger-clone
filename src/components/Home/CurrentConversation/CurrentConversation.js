@@ -38,12 +38,8 @@ class CurrentConversation extends Component {
   }
 
   componentDidMount() {
-    /*
-      axios to get the following and save them to state:
-        - message history with current correspondent
-    */
-    let {id, firstName} = this.props.currentCorrespondent;
-    axios.post('/api/getMessagesForCorrespondent', {firstName, id})
+    let {id} = this.props.currentCorrespondent;
+    axios.post('/api/getMessagesForCorrespondent', {id})
     .then( res => {
       console.log(res);
     })
