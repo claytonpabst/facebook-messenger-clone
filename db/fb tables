@@ -5,6 +5,10 @@ CREATE TABLE Users (
     LastName varchar(255) NOT NULL,
     salt INTEGER Not Null,
     password varchar(255) Not NUll,
-    passwordhint varchar(255)
+    passwordhint varchar(255),
+    imageUrl text,
 );
+
+INSERT INTO Users (Email, FirstName, LastName, salt, password, passwordhint, imageUrl)
+values ()
 

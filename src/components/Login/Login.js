@@ -52,7 +52,7 @@ class Login extends Component {
           <div style={{"paddingLeft":"100px"}}>
             <span>
               <h6>Email</h6>
-              <input placeholder="Email" value={this.state.loginEmail} onChange={(e) => this.setState({ loginEmail: e.target.value })} type="text"/>  
+              <input placeholder="Email" value={this.state.loginEmail} onChange={(e) => this.setState({ loginEmail: e.target.value })} type="text" autoFocus />  
             </span>
             <span>
               <h6>Password</h6>
