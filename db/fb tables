@@ -27,3 +27,5 @@ values ()
 insert into conversations (conversationid, correspondent, fromcorrespondent, message)
 values () 
 
+update conversations set correspondent = $1 where id = $2
+

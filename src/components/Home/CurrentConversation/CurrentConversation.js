@@ -9,39 +9,25 @@ class CurrentConversation extends Component {
 
     this.state = {
       userInput: '',
-      messages: [
-        {
-          correspondent: 'Clayton Pabst',
-          fromCorrespondent: true,
-          toCorrespondent: false,
-          message: 'yo',
-          date: 'Sat 01/20/2018 10:15:32 MST'
-        },
-        {
-          correspondent: 'Clayton Pabst',
-          fromCorrespondent: false,
-          toCorrespondent: true,
-          message: 'hey',
-          date: 'Sat 01/20/2018 14:26:01 MST'
-        },
-        {
-          correspondent: 'Clayton Pabst',
-          fromCorrespondent: false,
-          toCorrespondent: true,
-          message: 'new one',
-          date: 'Sat 01/20/2018 14:26:01 MST'
-        },
-      ],
+      messages: [],
     }
 
     this.sendNewMessage = this.sendNewMessage.bind(this);
   }
 
-  componentDidMount() {
-    let {id} = this.props.currentCorrespondent;
-    axios.post('/api/getMessagesForCorrespondent', {id})
+  componentWillReceiveProps(props, prevProps){
+    if (props.currentCorrespondent !== prevProps.currentCorrespondent){
+      let {id} = props.currentCorrespondent;
+      this.getCurrentConversation(id);
+    }
+  }
+
+  getCurrentConversation(id){
+    axios.post('/api/getCurrentConversation', {id})
     .then( res => {
-      console.log(res);
+      this.setState({
+        messages: res.data
+      })
     })
   }
 
@@ -54,7 +40,6 @@ class CurrentConversation extends Component {
       messages.push({
         correspondent: 'Clayton Pabst',
         fromCorrespondent: false,
-        toCorrespondent: true,
         message: this.state.userInput,
         date: new Date()
       });
@@ -67,17 +52,22 @@ class CurrentConversation extends Component {
 
   render() {
 
-    let messages = this.state.messages.map((item, i) => {
-      let style = item.fromCorrespondent ?
-        { float: 'left', clear: 'left', color: 'black', background: '#ccc' }
-        : { float: 'right', clear: 'right', color: 'white', background: '#0084ff' };
-      return (
-        <div className='message' key={i}>
-          <div className='float_spacer' ></div>
-          <p style={style}>{item.message}</p>
-        </div>
-      )
-    })
+    let messages;
+    if (this.state.messages.length){
+      messages = this.state.messages.map((item, i) => {
+        let style = item.fromcorrespondent ?
+          { float: 'left', clear: 'left', color: 'black', background: '#ccc' }
+          : { float: 'right', clear: 'right', color: 'white', background: '#0084ff' };
+        return (
+          <div className='message' key={i}>
+            <div className='float_spacer' ></div>
+            <p style={style}>{item.message}</p>
+          </div>
+        )
+      })
+    }else{
+      messages = null;
+    }
 
     return (
       <section className='current_conversation'>

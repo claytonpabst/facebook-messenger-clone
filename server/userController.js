@@ -2,8 +2,8 @@ var app = require('./index.js');
 
 module.exports = {
 
-  getMessagesForCorrespondent: function (req, res) {
-    console.log("getting message history for correspondent");
+  getCurrentConversation: function (req, res) {
+    console.log("getting current conversation");
     const db = req.app.get('db');
 
     if (!req.session.user){
@@ -11,9 +11,9 @@ module.exports = {
     }
 
     // conversation id is users id first, then a colon, then correspondent's id
-    let conversationid = req.session.id + ':' + req.body.id
+    let conversationid = req.session.user.id + ':' + req.body.id
 
-    db.getMessagesForCorrespondent([conversationid])
+    db.getCurrentConversation([conversationid])
       .then(response => {
         console.log(response);
         return res.status(200).send(response);

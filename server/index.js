@@ -43,7 +43,7 @@ var userController = require("./userController.js");
 app.get('/api/isLoggedIn', mainController.isLoggedIn);
 app.post('/api/login', mainController.login);
 app.post('/api/getMostRecentCorrespondent', userController.getMostRecentCorrespondent);
-app.post('/api/getMessagesForCorrespondent', userController.getMessagesForCorrespondent);
+app.post('/api/getCurrentConversation', userController.getCurrentConversation);
 
 
 

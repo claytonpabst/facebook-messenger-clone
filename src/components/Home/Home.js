@@ -33,7 +33,7 @@ class Home extends Component {
   componentDidMount() {
     axios.get('/api/isLoggedIn')
     .then( res => {
-      console.log(res);
+      // console.log(res);
       if (res.data.isLoggedIn || this.state.devMode){
         // If the user is logged in, check who their most recent conversation was with
         axios.post('/api/getMostRecentCorrespondent', {id: res.data.mostrecentcorrespondentid})
