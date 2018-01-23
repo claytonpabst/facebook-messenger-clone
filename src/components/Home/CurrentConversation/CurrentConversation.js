@@ -32,10 +32,16 @@ class CurrentConversation extends Component {
   }
 
   sendNewMessage(e) {
-    //This will eventually send to the db and then request an update to the conversation.
     let key = e.keyCode || e.which;
     if (key === 13 && this.state.userInput !== '') {
       e.preventDefault();
+      axios.post('/api/addNewMessage', {"correspondentid": this.props.currentCorrespondent.id, 
+                                        "correspondentfirstname": this.props.currentCorrespondent.firstName, 
+                                        "correspondentlastname": this.props.currentCorrespondent.lastName,
+                                        "message": this.state.userInput})
+        .then(res => {
+          console.log(res.data);
+        })
       let messages = [...this.state.messages];
       messages.push({
         correspondent: 'Clayton Pabst',

@@ -1,4 +1,4 @@
 select * from conversations
 where conversationid = $1
-order by timestamp desc
+order by timestamp asc
 limit 20
