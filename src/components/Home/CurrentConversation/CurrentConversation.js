@@ -37,7 +37,7 @@ class CurrentConversation extends Component {
       e.preventDefault();
       axios.post('/api/addNewMessage', {"correspondentid": this.props.currentCorrespondent.id, 
                                         "correspondentfirstname": this.props.currentCorrespondent.firstName, 
-                                        "correspondentlastname": this.props.currentCorrespondent.lastname,
+                                        "correspondentlastname": this.props.currentCorrespondent.lastName,
                                         "message": this.state.userInput})
         .then(res => {
           console.log(res.data);
