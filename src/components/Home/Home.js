@@ -16,6 +16,7 @@ class Home extends Component {
 
     this.state = {
       isLoggedIn: false,
+      devMode: true,
       text: "Home Page",
       timestamp: "no timestamp yet",
       user: {},
@@ -28,7 +29,7 @@ class Home extends Component {
     axios.get('/api/isLoggedIn')
     .then( res => {
       console.log(res);
-      if (res.data.isLoggedIn){
+      if (res.data.isLoggedIn || this.state.devMode){
         this.setState({
           isLoggedIn: true,
           user: res.data
@@ -64,7 +65,7 @@ class Home extends Component {
       <div className="home">
 
         {
-          this.state.isLoggedIn ? 
+          (this.state.isLoggedIn || this.state.devMode) ? 
             <div>
               <Header user={this.state.user} />
               <HomeHeader user={this.state.user} />
