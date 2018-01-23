@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 import './Conversations.css';
 
 class Conversations extends Component {
@@ -7,47 +9,51 @@ class Conversations extends Component {
     super(props);
 
     this.state = {
-      contacts: [
-        {
-          imageUrl: 'https://scontent-mia3-1.xx.fbcdn.net/v/t1.0-1/p24x24/1913953_1539741286351693_7720842032649839245_n.jpg?oh=79d21aee4236dc38bcbfc89e1ec8485a&oe=5B21B8C6',
-          id: 2,
-          firstName: 'Clayton',
-          lastName: 'Pabst',
-          mostRecentMessage: 'hello',
-          date: 'Sat'
-        },
-        {
-          imageUrl: 'https://scontent-mia3-1.xx.fbcdn.net/v/t1.0-1/p24x24/1913953_1539741286351693_7720842032649839245_n.jpg?oh=79d21aee4236dc38bcbfc89e1ec8485a&oe=5B21B8C6',
-          id: 2,
-          firstName: 'Kent',
-          lastName: 'Garfield',
-          mostRecentMessage: 'howdy',
-          date: 'Sat'
-        }
-      ]
+      conversationThreads: [],
+      somethingElse: null
     }
 
   }
 
   componentDidMount(){
-    
+    axios.get('/api/getConversationThreads')
+    .then( res => {
+      // console.log(res.data);
+      this.setState({
+        conversationThreads: res.data
+      })
+    })
   }
 
   render() {
+    // console.log(this.state);
+    let conversationThreads; 
+    conversationThreads = this.state.conversationThreads.length ? 
+      this.state.conversationThreads.map( (item, i) => {
+        let timestamp = item.timestamp.substr(5,2) + '/' + item.timestamp.substr(8,2);
+        let messagePreview = item.mostrecentmessage.length >= 40
+          ? 
+          item.mostrecentmessage.substr(0,40) + '...'
+          : 
+          item.mostrecentmessage;
+
+        return (
+          <div key={i} className='thread_wrapper' onClick={() => this.props.getNewConversation(item.correspondentid)}>
+            <img src={item.correspondentimageurl} alt='contact thumbnail' />
+            <div>
+              <p>{item.correspondentfirstname} {item.correspondentlastname}</p>
+              <h1>{messagePreview}</h1>
+            </div>
+            <span>{timestamp}</span>
+          </div>
+        )
+      }) 
+    : <div>No Conversations</div>
+
+
     return (
       <section className='conversations'>
-        {
-          this.state.contacts.map( (item, i) => {
-            return (
-              <div key={i} className='contact_wrapper'>
-                <img src={item.imageUrl} alt='contact thumbnail' />
-                <p>{item.firstName} {item.lastName}</p>
-                <p>{item.date}</p>
-                <p>{item.mostRecentMessage}</p>
-              </div>
-            )
-          })
-        }
+        {conversationThreads}
       </section>
     );
   }

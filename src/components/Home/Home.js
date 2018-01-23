@@ -16,7 +16,7 @@ class Home extends Component {
 
     this.state = {
       isLoggedIn: false,
-      devMode: true,
+      devMode: false,
       text: "Home Page",
       timestamp: "no timestamp yet",
       user: {},
@@ -27,7 +27,8 @@ class Home extends Component {
       },
     }
 
-    //bind me
+
+    this.getNewConversation = this.getNewConversation.bind(this);
   }
 
   componentDidMount() {
@@ -36,20 +37,11 @@ class Home extends Component {
       // console.log(res);
       if (res.data.isLoggedIn || this.state.devMode){
         // If the user is logged in, check who their most recent conversation was with
-        axios.post('/api/getMostRecentCorrespondent', {id: res.data.mostrecentcorrespondentid})
-        .then( response => {
-          
-          let currentCorrespondent = Object.assign({}, this.state.currentCorrespondent);
-          currentCorrespondent.id = response.data.id;
-          currentCorrespondent.firstName = response.data.firstname;
-          currentCorrespondent.lastName = response.data.lastname;
-          currentCorrespondent.thumbnail = response.data.imageurl;
-          
-          this.setState({
-            isLoggedIn: true,
-            user: res.data,
-            currentCorrespondent: currentCorrespondent
-          })
+        this.getNewConversation(res.data.mostrecentcorrespondentid)
+
+        this.setState({
+          isLoggedIn: true,
+          user: res.data,
         })
         // socket stuff
         // this.subscribeToTimer(2000, (err, timestamp) => {
@@ -68,7 +60,22 @@ class Home extends Component {
         }
       }
     })
+  }
 
+  getNewConversation(newID){
+    axios.post('/api/getNewCorrespondent', {id: newID})
+    .then( response => {
+      
+      let currentCorrespondent = Object.assign({}, this.state.currentCorrespondent);
+      currentCorrespondent.id = response.data.id;
+      currentCorrespondent.firstName = response.data.firstname;
+      currentCorrespondent.lastName = response.data.lastname;
+      currentCorrespondent.thumbnail = response.data.imageurl;
+      
+      this.setState({
+        currentCorrespondent: currentCorrespondent
+      })
+    })
   }
 
   subscribeToTimer(interval, cb) {
@@ -86,7 +93,7 @@ class Home extends Component {
             <div>
               <Header user={this.state.user} />
               <HomeHeader user={this.state.user} currentCorrespondent={this.state.currentCorrespondent} />
-              <Conversations user={this.state.user} />
+              <Conversations getNewConversation={this.getNewConversation} user={this.state.user} />
               <CurrentConversation user={this.state.user} currentCorrespondent={this.state.currentCorrespondent} />
               <ConversationOptions user={this.state.user} />
             </div>

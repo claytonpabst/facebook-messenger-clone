@@ -9,8 +9,8 @@ class Login extends Component {
   constructor(props){
     super(props);
     this.state = {
-        loginEmail:'',
-        loginPassword:'',
+        loginEmail:'claytonpabst@gmail.com',
+        loginPassword:'claytonpabst@gmail.com',
         firstName:'',
         lastName:'',
         signupEmail:'',
@@ -31,7 +31,7 @@ class Login extends Component {
   loginButtonPressed(){
     axios.post('/api/login', {email:this.state.loginEmail, password:this.state.loginPassword})
     .then( res => {
-      console.log(res);
+      // console.log(res);
       if (res.data.isLoggedIn){
         let newUrl = window.location.href + 'messages';
         window.location.href = newUrl;
@@ -42,7 +42,7 @@ class Login extends Component {
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <section className='login_page'>
         <header className='login_header'>

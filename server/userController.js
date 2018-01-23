@@ -3,7 +3,7 @@ var app = require('./index.js');
 module.exports = {
 
   getCurrentConversation: function (req, res) {
-    console.log("getting current conversation");
+    // console.log("getting current conversation");
     const db = req.app.get('db');
 
     if (!req.session.user){
@@ -15,7 +15,7 @@ module.exports = {
 
     db.getCurrentConversation([conversationid])
       .then(response => {
-        console.log(response);
+        // console.log(response);
         return res.status(200).send(response);
       })
       .catch(err => {
@@ -24,8 +24,8 @@ module.exports = {
       });
   },
 
-  getMostRecentCorrespondent: function (req, res) {
-    console.log("getting most recent correspondent");
+  getNewCorrespondent: function (req, res) {
+    // console.log("getting most recent correspondent");
     const db = req.app.get('db');
 
     if (!req.session.user){
@@ -34,7 +34,7 @@ module.exports = {
 
     db.getUserInfo([req.body.id])
       .then(response => {
-        console.log(response[0]);
+        // console.log(response[0]);
         return res.status(200).send(response[0]);
       })
       .catch(err => {
@@ -42,5 +42,23 @@ module.exports = {
         return res.status(200).send(err);
       });
   },
+
+  getConversationThreads: function(req, res){
+
+    if (!req.session.user){
+      return res.status(200).send({message: 'Must be logged in to use this page'});
+    }
+
+    const db = req.app.get('db');
+
+    db.getConversationThreads([req.session.user.id])
+      .then(response => {
+        return res.status(200).send(response)
+      })
+      .catch(err => {
+        console.log(err);
+        return res.status(200).send(err);
+      });
+  }
 
 };
