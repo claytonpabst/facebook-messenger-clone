@@ -2,7 +2,7 @@ var app = require('./index.js');
 
 mainController = {
     login: function(req, res){
-        console.log('hit')
+        // console.log('hit')
         const db = req.app.get('db');
         db.login([req.body.email, req.body.password])
         .then( response => {
@@ -17,8 +17,8 @@ mainController = {
                   message: 'Invalid email or password.'
                 })
             }
-            console.log(response)
-            console.log(req.session)
+            // console.log(response)
+            // console.log(req.session)
             return res.status(200).json( response[0] )
         })
         .catch(err => {

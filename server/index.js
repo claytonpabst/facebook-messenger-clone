@@ -39,11 +39,14 @@ app.use(express.static(__dirname + './../build'))
 var mainController = require("./mainController.js");
 var userController = require("./userController.js");
 
-//////////Endpoints for the front end
+//////////Endpoints mainController
 app.get('/api/isLoggedIn', mainController.isLoggedIn);
 app.post('/api/login', mainController.login);
+
+//endpoints for user
 app.post('/api/getMostRecentCorrespondent', userController.getMostRecentCorrespondent);
 app.post('/api/getCurrentConversation', userController.getCurrentConversation);
+app.get('/api/getConversationThreads', userController.getConversationThreads);
 
 
 

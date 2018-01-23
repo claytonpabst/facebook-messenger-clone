@@ -4,3 +4,41 @@
     position: relative;
     float: left;
 }
+.thread_wrapper{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+}
+.thread_wrapper div{
+    position: relative;
+}
+.thread_wrapper:hover{
+    background: lightgray;
+}
+.thread_wrapper img{
+    height: 60px;
+    width: 60px;
+    margin: 8px;
+    border-radius: 50%;
+    /* clear: none;
+    float: left; */
+}
+.thread_wrapper p{
+    margin-top:5px;
+    padding: 5px;
+    overflow: hidden;
+}
+.thread_wrapper h1{
+    margin-top:5px;
+    padding: 5px;
+    overflow: hidden;
+    color: grey;
+}
+.thread_wrapper span{
+    position: absolute;
+    margin-top: 10px;
+    right: 5px;
+    overflow: hidden;
+    font-weight: lighter;
+    color: gray;
+}

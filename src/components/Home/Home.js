@@ -16,7 +16,7 @@ class Home extends Component {
 
     this.state = {
       isLoggedIn: false,
-      devMode: true,
+      devMode: false,
       text: "Home Page",
       timestamp: "no timestamp yet",
       user: {},
