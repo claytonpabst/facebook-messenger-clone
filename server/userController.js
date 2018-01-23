@@ -49,13 +49,17 @@ module.exports = {
       return res.status(200).send({message: 'Must be logged in to use this page'});
     }
 
-    console.log(req.session.user.id);
+    // console.log(req.session.user.id);
     const db = req.app.get('db');
 
-    // db.getConversationThreads([req.session.id])
-    // .then(response => {
-    //   // console.log(response);
-    // });
+    db.getConversationThreads([req.session.user.id])
+      .then(response => {
+        return res.status(200).send(response)
+      })
+      .catch(err => {
+        console.log(err);
+        return res.status(200).send(err);
+      });
   }
 
 };

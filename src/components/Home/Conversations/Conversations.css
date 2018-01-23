@@ -24,21 +24,22 @@
     float: left; */
 }
 .thread_wrapper p{
-    margin-top:5px;
+    margin-top:10px;
     padding: 5px;
     overflow: hidden;
 }
 .thread_wrapper h1{
-    margin-top:5px;
+    margin-top:0px;
     padding: 5px;
     overflow: hidden;
     color: grey;
 }
 .thread_wrapper span{
     position: absolute;
-    margin-top: 10px;
+    margin-top: 16px;
     right: 5px;
     overflow: hidden;
     font-weight: lighter;
     color: gray;
+    font-size: 12px;
 }

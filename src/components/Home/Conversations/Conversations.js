@@ -9,24 +9,8 @@ class Conversations extends Component {
     super(props);
 
     this.state = {
-      conversationThreads: [
-        {
-          imageUrl: 'https://scontent-mia3-1.xx.fbcdn.net/v/t1.0-1/p24x24/1913953_1539741286351693_7720842032649839245_n.jpg?oh=79d21aee4236dc38bcbfc89e1ec8485a&oe=5B21B8C6',
-          id: 2,
-          firstName: 'Clayton',
-          lastName: 'Pabst',
-          mostRecentMessage: 'hello',
-          date: 'Sat'
-        },
-        {
-          imageUrl: 'https://scontent-mia3-1.xx.fbcdn.net/v/t1.0-1/p24x24/1913953_1539741286351693_7720842032649839245_n.jpg?oh=79d21aee4236dc38bcbfc89e1ec8485a&oe=5B21B8C6',
-          id: 2,
-          firstName: 'Kent',
-          lastName: 'Garfield',
-          mostRecentMessage: 'howdy',
-          date: 'Sat'
-        }
-      ]
+      conversationThreads: [],
+      somethingElse: null
     }
 
   }
@@ -34,6 +18,7 @@ class Conversations extends Component {
   componentDidMount(){
     axios.get('/api/getConversationThreads')
     .then( res => {
+      // console.log(res.data);
       this.setState({
         conversationThreads: res.data
       })
@@ -41,17 +26,19 @@ class Conversations extends Component {
   }
 
   render() {
+    console.log(this.state);
     let conversationThreads; 
     conversationThreads = this.state.conversationThreads.length ? 
       this.state.conversationThreads.map( (item, i) => {
+        let timestamp = item.timestamp.substr(5,2) + '/' + item.timestamp.substr(8,2);
         return (
           <div key={i} className='thread_wrapper'>
-            <img src={item.imageUrl} alt='contact thumbnail' />
+            <img src={item.correspondentimageurl} alt='contact thumbnail' />
             <div>
-              <p>{item.firstName} {item.lastName}</p>
-              <h1>{item.mostRecentMessage}</h1>
+              <p>{item.correspondentfirstname} {item.correspondentlastname}</p>
+              <h1>{item.mostrecentmessage}</h1>
             </div>
-            <span>{item.date}</span>
+            <span>{timestamp}</span>
           </div>
         )
       }) 
