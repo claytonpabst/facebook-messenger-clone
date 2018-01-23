@@ -1,0 +1,10 @@
+CREATE TABLE Users (
+    ID serial NOT NULL PRIMARY KEY,
+    Email varchar(255) not null,
+    FirstName varchar(255) not null,
+    LastName varchar(255) NOT NULL,
+    salt INTEGER Not Null,
+    password varchar(255) Not NUll,
+    passwordhint varchar(255)
+);
+

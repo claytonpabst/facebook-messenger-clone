@@ -1,0 +1,74 @@
+-- CREATE TABLE Users (
+--     ID serial NOT NULL PRIMARY KEY,
+--     UserName varchar(255) not null,
+--     FirstName varchar(255) not null,
+--     LastName varchar(255) NOT NULL
+-- );
+
+create table admins (
+--     id serial not null primary key,
+--     username varchar(255) not null,
+--     adminPassword varchar(255) not null,
+--     firstName varchar(255) not null,
+--     lastName varchar(255) not null
+-- )
+
+create table products (
+    id serial not null primary key,
+    title varchar(255) not null,
+    description text not null,
+    price varchar(255) not null,
+    image text not null,
+    attributes text not null
+)
+
+insert into products (title, description, price, image, attributes) values (
+    'THRILL',
+    'THRILL is a performance instrument for playing spine-chilling atmospheres, clusters, and hybrid textures – in real time.',
+    '$299.00',
+    'https://www.native-instruments.com/typo3temp/pics/img-packshot-thrill_pf-d268b7ee419ecbdf415fd5cafcead297-d.jpg',
+    'All Cinematic'
+)
+
+-- insert into admins (username, adminPassword, firstName, lastName) values ('admin', 'admin', 'Clayton', 'Pabst');
+
+-- CREATE TABLE userPasswords (
+--     userPassword varchar(255) not null,
+--     password_ID int, 
+--         Foreign Key (password_ID) REFERENCES Users(ID)
+-- );
+
+-- select * from users
+
+-- insert into users (username, firstname, lastname) values ('admin', 'Jane', 'Doe');
+
+-- insert into userpasswords (userpassword, password_id) values('admin', 2)
+
+
+SELECT * FROM users 
+JOIN userpasswords ON userpasswords.password_id = users.id
+where username = 'user'
+
+create table users(
+    id serial not null primary key,
+    userName varchar(255) not null,
+    userPassword varchar(255) not null,
+    firstName varchar(255) not null,
+    lastName varchar(255) not null,
+    isAdmin BOOLEAN
+)
+
+insert into users (username, userpassword, firstname, lastname, isadmin) values ('admin', 'admin', 'Jane', 'Doe', true)
+
+create table cart(
+    id serial not null primary key,
+    productid integer,
+        Foreign key (productid) REFERENCES products(id)
+    quantity integer,
+    username varchar(255),
+        Foreign key (username) REFERENCES users(username)
+)
+
+select * from cart 
+JOIN products ON products.id = cart.productid
+where userid = 1
