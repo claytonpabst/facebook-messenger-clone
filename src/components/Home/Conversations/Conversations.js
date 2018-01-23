@@ -26,17 +26,23 @@ class Conversations extends Component {
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     let conversationThreads; 
     conversationThreads = this.state.conversationThreads.length ? 
       this.state.conversationThreads.map( (item, i) => {
         let timestamp = item.timestamp.substr(5,2) + '/' + item.timestamp.substr(8,2);
+        let messagePreview = item.mostrecentmessage.length >= 40
+          ? 
+          item.mostrecentmessage.substr(0,40) + '...'
+          : 
+          item.mostrecentmessage;
+
         return (
-          <div key={i} className='thread_wrapper'>
+          <div key={i} className='thread_wrapper' onClick={() => this.props.getNewConversation(item.correspondentid)}>
             <img src={item.correspondentimageurl} alt='contact thumbnail' />
             <div>
               <p>{item.correspondentfirstname} {item.correspondentlastname}</p>
-              <h1>{item.mostrecentmessage}</h1>
+              <h1>{messagePreview}</h1>
             </div>
             <span>{timestamp}</span>
           </div>

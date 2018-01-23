@@ -14,6 +14,7 @@
 }
 .thread_wrapper:hover{
     background: lightgray;
+    cursor: pointer;
 }
 .thread_wrapper img{
     height: 60px;
@@ -33,6 +34,9 @@
     padding: 5px;
     overflow: hidden;
     color: grey;
+    font-size: 14px;
+    font-weight: lighter;
+    height: 18px;
 }
 .thread_wrapper span{
     position: absolute;

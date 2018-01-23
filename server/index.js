@@ -44,7 +44,7 @@ app.get('/api/isLoggedIn', mainController.isLoggedIn);
 app.post('/api/login', mainController.login);
 
 //endpoints for user
-app.post('/api/getMostRecentCorrespondent', userController.getMostRecentCorrespondent);
+app.post('/api/getNewCorrespondent', userController.getNewCorrespondent);
 app.post('/api/getCurrentConversation', userController.getCurrentConversation);
 app.get('/api/getConversationThreads', userController.getConversationThreads);
 

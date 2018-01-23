@@ -24,7 +24,7 @@ module.exports = {
       });
   },
 
-  getMostRecentCorrespondent: function (req, res) {
+  getNewCorrespondent: function (req, res) {
     // console.log("getting most recent correspondent");
     const db = req.app.get('db');
 
@@ -49,7 +49,6 @@ module.exports = {
       return res.status(200).send({message: 'Must be logged in to use this page'});
     }
 
-    // console.log(req.session.user.id);
     const db = req.app.get('db');
 
     db.getConversationThreads([req.session.user.id])
