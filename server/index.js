@@ -40,7 +40,9 @@ var userController = require("./userController.js");
 var mainController = require("./mainController.js");
 
 //////////Endpoints for the front end
+app.get('/api/isLoggedIn', mainController.isLoggedIn);
 app.post('/api/login', mainController.login);
+
 
 
 
