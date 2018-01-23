@@ -12,3 +12,23 @@ CREATE TABLE Users (
 INSERT INTO Users (Email, FirstName, LastName, salt, password, passwordhint, imageUrl)
 values ()
 
+create table Loren1Clayton2 (
+    correspondent text,
+    fromCorrespondent boolean,
+    message text,
+    timestamp timestamp default current_timestamp
+);
+
+create table Loren1Clayton2 (
+    correspondent text,
+    fromCorrespondent boolean,
+    message text,
+    timestamp timestamp default current_timestamp
+);
+
+insert into Clayton2Loren1 (correspondent, fromcorrespondent, message)
+values ()
+
+insert into Loren1Clayton2 (correspondent, fromcorrespondent, message)
+values ()
+

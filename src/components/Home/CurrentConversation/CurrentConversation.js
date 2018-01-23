@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import './CurrentConversation.css';
 
 class CurrentConversation extends Component {
@@ -39,9 +40,12 @@ class CurrentConversation extends Component {
   componentDidMount() {
     /*
       axios to get the following and save them to state:
-        - current correspondent's info
         - message history with current correspondent
     */
+    axios.post('/api/getMessagesForCorrespondent', {id: this.props.currentCorrespondent.id})
+    .then( res => {
+      console.log(res);
+    })
   }
 
   sendNewMessage(e) {

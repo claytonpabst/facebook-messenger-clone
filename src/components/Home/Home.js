@@ -21,6 +21,7 @@ class Home extends Component {
       timestamp: "no timestamp yet",
       user: {},
       currentCorrespondent: {
+        id: 2,
         firstName: 'Clayton',
         lastName: 'Pabst',
         thumbnail: 'https://scontent-lax3-1.xx.fbcdn.net/v/t1.0-1/p50x50/20106655_771138229724477_2770561463904245587_n.jpg?oh=113b7dd649105f48177516849be07701&oe=5AF5D52F',
