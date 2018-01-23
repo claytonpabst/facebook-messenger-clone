@@ -1,3 +1,3 @@
 select * from $1
-order by posteddate desc
+order by timestamp desc
 limit 20

@@ -42,6 +42,7 @@ var userController = require("./userController.js");
 //////////Endpoints for the front end
 app.get('/api/isLoggedIn', mainController.isLoggedIn);
 app.post('/api/login', mainController.login);
+app.post('/api/getMostRecentCorrespondent', userController.getMostRecentCorrespondent);
 app.post('/api/getMessagesForCorrespondent', userController.getMessagesForCorrespondent);
 
 
