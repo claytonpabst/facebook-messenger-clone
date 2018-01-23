@@ -20,6 +20,13 @@ class Home extends Component {
       text: "Home Page",
       timestamp: "no timestamp yet",
       user: {},
+      currentCorrespondent: {
+        name: 'Clayton Pabst',
+        thumbnail: 'https://scontent-lax3-1.xx.fbcdn.net/v/t1.0-1/p50x50/20106655_771138229724477_2770561463904245587_n.jpg?oh=113b7dd649105f48177516849be07701&oe=5AF5D52F',
+        friendStatus: "You're friends on Facebook",
+        occupation: 'New Look Pro Studios',
+        location: 'Syracuse, Utah',
+      },
     }
 
     //bind me
@@ -70,7 +77,7 @@ class Home extends Component {
               <Header user={this.state.user} />
               <HomeHeader user={this.state.user} />
               <Conversations user={this.state.user} />
-              <CurrentConversation user={this.state.user} />
+              <CurrentConversation user={this.state.user} currentCorrespondent={this.state.currentCorrespondent} />
               <ConversationOptions user={this.state.user} />
             </div>
           : <div style={{fontSize: '30px'}}>Loading....</div>
