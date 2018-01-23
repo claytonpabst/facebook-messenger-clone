@@ -8,3 +8,5 @@ CREATE TABLE Users (
     passwordhint varchar(255)
 );
 
+-- alter table users
+-- add column imageurl text;
