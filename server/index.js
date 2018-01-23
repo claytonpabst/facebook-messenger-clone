@@ -36,12 +36,14 @@ massive(config.connection)
 
 app.use(express.static(__dirname + './../build'))
 
-var userController = require("./userController.js");
 var mainController = require("./mainController.js");
+var userController = require("./userController.js");
 
 //////////Endpoints for the front end
 app.get('/api/isLoggedIn', mainController.isLoggedIn);
 app.post('/api/login', mainController.login);
+app.post('/api/getMostRecentCorrespondent', userController.getMostRecentCorrespondent);
+app.post('/api/getCurrentConversation', userController.getCurrentConversation);
 
 
 

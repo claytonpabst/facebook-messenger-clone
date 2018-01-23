@@ -20,6 +20,11 @@ class Home extends Component {
       text: "Home Page",
       timestamp: "no timestamp yet",
       user: {},
+      currentCorrespondent: {
+        friendStatus: "You're friends on Facebook",
+        occupation: 'Doctor',
+        location: 'Salt Lake City, Utah',
+      },
     }
 
     //bind me
@@ -28,11 +33,23 @@ class Home extends Component {
   componentDidMount() {
     axios.get('/api/isLoggedIn')
     .then( res => {
-      console.log(res);
+      // console.log(res);
       if (res.data.isLoggedIn || this.state.devMode){
-        this.setState({
-          isLoggedIn: true,
-          user: res.data
+        // If the user is logged in, check who their most recent conversation was with
+        axios.post('/api/getMostRecentCorrespondent', {id: res.data.mostrecentcorrespondentid})
+        .then( response => {
+          
+          let currentCorrespondent = Object.assign({}, this.state.currentCorrespondent);
+          currentCorrespondent.id = response.data.id;
+          currentCorrespondent.firstName = response.data.firstname;
+          currentCorrespondent.lastName = response.data.lastname;
+          currentCorrespondent.thumbnail = response.data.imageurl;
+          
+          this.setState({
+            isLoggedIn: true,
+            user: res.data,
+            currentCorrespondent: currentCorrespondent
+          })
         })
         // socket stuff
         // this.subscribeToTimer(2000, (err, timestamp) => {
@@ -68,9 +85,9 @@ class Home extends Component {
           (this.state.isLoggedIn || this.state.devMode) ? 
             <div>
               <Header user={this.state.user} />
-              <HomeHeader user={this.state.user} />
+              <HomeHeader user={this.state.user} currentCorrespondent={this.state.currentCorrespondent} />
               <Conversations user={this.state.user} />
-              <CurrentConversation user={this.state.user} />
+              <CurrentConversation user={this.state.user} currentCorrespondent={this.state.currentCorrespondent} />
               <ConversationOptions user={this.state.user} />
             </div>
           : <div style={{fontSize: '30px'}}>Loading....</div>
