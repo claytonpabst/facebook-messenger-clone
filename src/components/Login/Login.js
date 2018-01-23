@@ -32,6 +32,12 @@ class Login extends Component {
     axios.post('/api/login', {email:this.state.loginEmail, password:this.state.loginPassword})
     .then( res => {
       console.log(res);
+      if (res.data.isLoggedIn){
+        let newUrl = window.location.href + 'messages';
+        window.location.href = newUrl;
+      }else{
+        return alert('Invalid email or password');
+      }
     })
   }
 

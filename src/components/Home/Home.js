@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import openSocket from 'socket.io-client';
 import './Home.css';
 
@@ -14,19 +15,43 @@ class Home extends Component {
     super(props)
 
     this.state = {
+      isLoggedIn: false,
+      devMode: true,
       text: "Home Page",
-      timestamp: "no timestamp yet"
+      timestamp: "no timestamp yet",
+      user: {},
     }
 
     //bind me
   }
 
   componentDidMount() {
-    this.subscribeToTimer(2000, (err, timestamp) => {
-      this.setState({
-        timestamp: timestamp
-      })
+    axios.get('/api/isLoggedIn')
+    .then( res => {
+      console.log(res);
+      if (res.data.isLoggedIn || this.state.devMode){
+        this.setState({
+          isLoggedIn: true,
+          user: res.data
+        })
+        // socket stuff
+        // this.subscribeToTimer(2000, (err, timestamp) => {
+        //   this.setState({
+        //     timestamp: timestamp,
+        //   })
+        // })
+      }else{
+        alert('Must be logged in to view this page');
+
+        if (window.location.href.match(/claytonpabst.com/)){
+          let newUrl = window.location.href.replace(/.com\/.*/, '.com');
+          window.location.href = newUrl;
+        }else{
+          window.location.href = 'http://localhost:3000';
+        }
+      }
     })
+
   }
 
   subscribeToTimer(interval, cb) {
@@ -39,14 +64,18 @@ class Home extends Component {
     return (
       <div className="home">
 
-        <Header />
-        <HomeHeader />
-        <Conversations />
-        <CurrentConversation />
-        <ConversationOptions />
-        {/* {this.state.text}
-        <p>{this.state.timestamp}</p> */}
-
+        {
+          (this.state.isLoggedIn || this.state.devMode) ? 
+            <div>
+              <Header user={this.state.user} />
+              <HomeHeader user={this.state.user} />
+              <Conversations user={this.state.user} />
+              <CurrentConversation user={this.state.user} />
+              <ConversationOptions user={this.state.user} />
+            </div>
+          : <div style={{fontSize: '30px'}}>Loading....</div>
+        }
+ 
       </div>
     );
   }
