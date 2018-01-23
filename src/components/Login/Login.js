@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import './Login.css';
 
@@ -28,7 +29,10 @@ class Login extends Component {
   }
 
   loginButtonPressed(){
-
+    axios.post('/api/login', {email:this.state.loginEmail, password:this.state.loginPassword})
+    .then( res => {
+      console.log(res);
+    })
   }
 
   render() {

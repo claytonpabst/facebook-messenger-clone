@@ -47,6 +47,7 @@ class CurrentConversation extends Component {
     //This will eventually send to the db and then request an update to the conversation.
     let key = e.keyCode || e.which;
     if(key === 13 && this.state.userInput !== ''){
+      e.preventDefault();
       let messages = [...this.state.messages];
       messages.push({
         correspondent: 'Clayton Pabst',

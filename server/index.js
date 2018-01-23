@@ -37,10 +37,12 @@ massive(config.connection)
 app.use(express.static(__dirname + './../build'))
 
 var userController = require("./userController.js");
+var mainController = require("./mainController.js");
 
 //////////Endpoints for the front end
+app.post('/api/login', mainController.login);
 
 
 
-io.listen(config.port);
+app.listen(config.port);
 console.log("listening on port:" + config.port);
