@@ -1,37 +1,51 @@
 var app = require('./index.js');
-var db = app.get('db');
 
 module.exports = {
-  getUserInfo: function(req, res){
-      console.log("get user info running");
-    db.find_by_id([req.session.passport.user.google_id],function(err,user){
-      if (err){
-        res.status(400).json(err);
-      }else if (user[0]){
-        res.status(200).json(user[0]);
-      }else if (user){
-        res.status(200).json(user);
-      }
-    });
-  },
-    
-  findById: function(accessToken,refreshToken,profile, done){
-      db.find_by_id([profile.id],function(err,user){
 
-          if(!user[0]){//if there isnt one, create!!
-            console.log('CREATING USER');
-            console.log('profile');
-            db.create_google_user([profile.id,profile.name.familyName, profile.name.givenName, accessToken],function(err,user){
-              console.log('USER CREATED',user);
-              return done(err,user);//goes to serialize user
-            })
-          }else{//if we find a user, return it
-            console.log('FOUND USER', user)
-            return done(err,user);
-          }
+  getMessagesForCorrespondent: function (req, res) {
+    console.log("getting message history for correspondent");
+    const db = req.app.get('db');
 
+    if (!req.session.user){
+      return res.status(200).send({message: 'Must be logged in to use this page'});
+    }
+
+    let {id, firstname} = req.session;
+    let {id2, firstname2} = req.body;
+    let tableName = firstname + id + firstname2 + id2;
+
+    db.query(
+      'select * from $1 order by timestamp desc limit 20', [tableName]
+    )
+
+    // db.getMessagesForCorrespondent([tableName])
+      .then(response => {
+        console.log(response);
+        return res.status(200).send(response);
       })
+      .catch(err => {
+        console.log(err);
+        return res.status(200).send(err);
+      });
+  },
 
-  }
-  
+  getMostRecentCorrespondent: function (req, res) {
+    console.log("getting most recent correspondent");
+    const db = req.app.get('db');
+
+    if (!req.session.user){
+      return res.status(200).send({message: 'Must be logged in to use this page'});
+    }
+
+    db.getUserInfo([req.body.id])
+      .then(response => {
+        console.log(response[0]);
+        return res.status(200).send(response[0]);
+      })
+      .catch(err => {
+        console.log(err);
+        return res.status(200).send(err);
+      });
+  },
+
 };

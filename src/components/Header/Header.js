@@ -17,7 +17,7 @@ class Header extends Component {
   }
 
   componentDidMount() {
-
+    console.log(this.props);
   }
 
   updateSearchInput(e){
@@ -44,8 +44,8 @@ class Header extends Component {
           <div className='header_controls_wrapper'>
             <ul className='header_navlist'>
               <li className='header_thumbnail_wrapper'>
-                <img className='header_thumbnail' src='https://scontent-lax3-1.xx.fbcdn.net/v/t1.0-1/p50x50/20106655_771138229724477_2770561463904245587_n.jpg?oh=113b7dd649105f48177516849be07701&oe=5AF5D52F' alt='user thumbnail' />
-                <p className='header_username'>Username</p>
+                <img className='header_thumbnail' src={this.props.user.imageurl || 'http://www.kogentsurgical.com/static/images/productImages/default-thumbnail.png'} alt='user thumbnail' />
+                <p className='header_username'>{this.props.user.firstname || 'Username'}</p>
               </li>
               <li className='header_navlist_home'>Home</li>
               <li>Find Friends</li>

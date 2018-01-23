@@ -5,6 +5,31 @@ CREATE TABLE Users (
     LastName varchar(255) NOT NULL,
     salt INTEGER Not Null,
     password varchar(255) Not NUll,
-    passwordhint varchar(255)
+    passwordhint varchar(255),
+    imageUrl text,
 );
+
+INSERT INTO Users (Email, FirstName, LastName, salt, password, passwordhint, imageUrl)
+values ()
+
+create table Loren1Clayton2 (
+    correspondent text,
+    fromCorrespondent boolean,
+    message text,
+    timestamp timestamp default current_timestamp
+);
+
+create table Loren1Clayton2 (
+    correspondent text,
+    fromCorrespondent boolean,
+    message text,
+    timestamp timestamp default current_timestamp
+);
+
+insert into Clayton2Loren1 (correspondent, fromcorrespondent, message)
+values ()
+
+insert into Loren1Clayton2 (correspondent, fromcorrespondent, message)
+values ()
+
 
