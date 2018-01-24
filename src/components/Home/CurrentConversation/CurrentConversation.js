@@ -82,7 +82,7 @@ class CurrentConversation extends Component {
           <div className='correspondent_info_wrapper'>
             <img src={this.props.currentCorrespondent.thumbnail} alt='correspondent thumbnail' className='correspondent_thumbnail' />
             <div className='correspondent_info'>
-              <h2>{this.props.currentCorrespondent.name}</h2>
+              <h2>{this.props.currentCorrespondent.firstName} {this.props.currentCorrespondent.lastName}</h2>
               <h4>{this.props.currentCorrespondent.friendStatus}</h4>
               <p>{this.props.currentCorrespondent.occupation}</p>
               <p>Lives in {this.props.currentCorrespondent.location}</p>

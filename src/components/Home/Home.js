@@ -95,7 +95,7 @@ class Home extends Component {
               <HomeHeader user={this.state.user} currentCorrespondent={this.state.currentCorrespondent} />
               <Conversations getNewConversation={this.getNewConversation} user={this.state.user} />
               <CurrentConversation user={this.state.user} currentCorrespondent={this.state.currentCorrespondent} />
-              <ConversationOptions user={this.state.user} />
+              <ConversationOptions user={this.state.user} currentCorrespondent={this.state.currentCorrespondent} />
             </div>
           : <div style={{fontSize: '30px'}}>Loading....</div>
         }
