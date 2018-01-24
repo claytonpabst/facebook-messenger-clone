@@ -30,7 +30,8 @@ class Conversations extends Component {
   }
 
   componentDidMount(){
-    
+    // axios call to get a list of all of the user's active conversations.
+    // When a new contact is clicked on, we need to make an axios call to update the user's mostrecentcorrespondentid info in their database
   }
 
   render() {

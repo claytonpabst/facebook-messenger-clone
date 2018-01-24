@@ -4,3 +4,68 @@
     position: relative;
     float: left;
 }
+
+.conversation_options_top{
+    width: 100%;
+    height: 80px;
+    border-bottom: 1px solid #ccc;
+    padding: 20px 20px 20px 70px;
+    position: relative;
+}
+
+.conversation_options_top p{
+    font-size: 13px;
+    margin-bottom: 3px;
+}
+
+.options_small_gray{
+    font-size: 11px;
+    color: #aaa;
+}
+
+.conversation_options_thumbnail{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 12px;
+}
+
+.conversation_options_middle{
+    width: 100%;
+    height: 50%;
+    border-bottom: 1px solid #ccc;
+    padding: 20px 20px;
+}
+
+.options_gray{
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #aaa;
+}
+
+.conversation_options_middle li{
+    font-size: 15px;
+}
+
+.conversation_options_list{
+    width: 100%;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.conversation_options_bottom{
+    width: 100%;
+    height: auto;
+    padding: 20px 20px;
+}
+
+.facebook_link{
+    font-size: 13px;
+    margin-top: 10px;
+    color: #0084ff;
+    cursor: pointer;
+}
