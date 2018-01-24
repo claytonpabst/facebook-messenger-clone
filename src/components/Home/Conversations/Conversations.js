@@ -12,6 +12,8 @@ class Conversations extends Component {
       conversationThreads: [],
       somethingElse: null,
       searchInput: '',
+      showSearchResults: false,
+      searchResults: [],
     }
 
   }
@@ -24,6 +26,32 @@ class Conversations extends Component {
         conversationThreads: res.data
       })
     })
+  }
+
+  handleUserInput(e){
+    this.setState({
+      searchInput: e.target.value
+    },  this.getSearchResults)
+  }
+
+  toggleSearchResults(newVal){
+    this.setState({
+      showSearchResults: newVal,
+      searchInput: ''
+    })
+    if (newVal === true){
+      this.getSearchResults();
+    }
+  }
+
+  getSearchResults(){
+    axios.post('/api/getSearchResults', {searchInput: this.state.searchInput})
+    .then( res => {
+      this.setState({
+        searchResults: res.data
+      })
+    })
+    .catch( err => console.log(err))
   }
 
   render() {
@@ -51,16 +79,37 @@ class Conversations extends Component {
       }) 
     : <div>No Conversations</div>
 
+    let searchResults = (
+      <div className='search_results'>
+        <p className='results_header'>Search Results</p>
+        {
+          this.state.searchResults.length ?
+            this.state.searchResults.map( (item,i) => {
+              return (
+                <div className='result' key={i}>
+                  <img src={item.imageurl} alt='contact thumbnail' className='result_img' />
+                  <p className='result_p'>{item.firstname} {item.lastname}</p>
+                </div>
+              )
+            })
+          : <p style={{width: '100%', textAlign: 'center'}}>0 Results Returned</p>
+        }
+      </div>
+    )
 
     return (
       <section className='conversations'>
 
         <div className='search_contacts'>
-          <input className='search_input' placeholder='Search Messenger' value={this.state.searchInput} onChange={(e) => this.setState({searchInput: e.target.value})} />
+          <input className='search_input' placeholder='Search Messenger' value={this.state.searchInput} onChange={(e) => this.handleUserInput(e)} onFocus={() => this.toggleSearchResults(true)} onBlur={() => this.toggleSearchResults(false)} />
         </div>
 
-        {conversationThreads}
-        
+        {
+          this.state.showSearchResults ? 
+          searchResults
+          : conversationThreads
+        }
+
       </section>
 
     );

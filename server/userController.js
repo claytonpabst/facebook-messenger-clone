@@ -25,12 +25,12 @@ module.exports = {
   },
 
   getNewCorrespondent: function (req, res) {
-    // console.log("getting most recent correspondent");
-    const db = req.app.get('db');
-
     if (!req.session.user){
       return res.status(200).send({message: 'Must be logged in to use this page'});
     }
+    
+    // console.log("getting most recent correspondent");
+    const db = req.app.get('db');
 
     db.getUserInfo([req.body.id])
       .then(response => {
@@ -120,6 +120,25 @@ module.exports = {
       });
 
 
+  },
+
+  getSearchResults: function(req, res){
+    if (!req.session.user){
+      return res.status(200).send({message: 'Must be logged in to use this page'});
+    }
+    
+    const db = req.app.get('db');
+    let searchInput = req.body.searchInput + '%';
+
+    db.searchUsers([searchInput])
+    .then( response => {
+      console.log(response);
+      return res.status(200).send(response);
+    })
+    .catch( err => {
+      console.log(err);
+      return res.status(200).send(err);
+    })
   }
 
 };
