@@ -8,28 +8,39 @@ CREATE TABLE Users (
     passwordhint varchar(255),
     imageUrl text,
 );
-
 INSERT INTO Users (Email, FirstName, LastName, salt, password, passwordhint, imageUrl)
 values ()
 
-create table Loren1Clayton2 (
+CREATE TABLE openthreads (
+--     ID serial NOT NULL PRIMARY KEY,
+--     userid integer,
+--     correspondentid integer,
+--     correspondentimageurl text,
+--     correspondentfirstname varchar(255),
+--     correspondentlastname varchar(255),
+--     mostrecentmessage text,
+--     timestamp timestamp default current_timestamp
+-- );
+insert into openthreads (userid, correspondentid, correspondentimageurl, correspondentfirstname, correspondentlastname, mostrecentmessage, timestamp)
+values (2, 1, 'https://scontent.fslc1-2.fna.fbcdn.net/v/t1.0-1/p50x50/1913953_1539741286351693_7720842032649839245_n.jpg?oh=5cd70e8dec37bd8b838923972993d701&oe=5AF88750', 'Loren', 'Pabst', 'testing', current_timestamp)
+
+update openthreads
+set mostrecentmessage = 'This is an updated message to see if Loren moves to the top', timestamp = CURRENT_TIMESTAMP
+where userid = 2 and correspondentid = 1
+
+create table conversations(
+    id serial,
+    belongstotable text,
     correspondent text,
     fromCorrespondent boolean,
     message text,
     timestamp timestamp default current_timestamp
-);
+)
 
-create table Loren1Clayton2 (
-    correspondent text,
-    fromCorrespondent boolean,
-    message text,
-    timestamp timestamp default current_timestamp
-);
-
-insert into Clayton2Loren1 (correspondent, fromcorrespondent, message)
+insert into conversations (belongstotable, correspondent, fromcorrespondent, message)
 values ()
 
-insert into Loren1Clayton2 (correspondent, fromcorrespondent, message)
-values ()
+insert into conversations (conversationid, correspondent, fromcorrespondent, message)
+values () 
 
-
+update conversations set correspondent = $1 where id = $2
