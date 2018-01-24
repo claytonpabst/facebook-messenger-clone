@@ -20,6 +20,7 @@ class Login extends Component {
     }
 
     this.loginButtonPressed = this.loginButtonPressed.bind(this);
+    this.createNewUser = this.createNewUser.bind(this);
   }
 
   handleInput(e, variable){
@@ -39,6 +40,20 @@ class Login extends Component {
         return alert('Invalid email or password');
       }
     })
+  }
+
+  createNewUser(){
+    if(this.state.signupEmail === this.state.signupEmailConfirmation && this.state.signupPassword === this.state.signupPasswordConfirmation){
+      axios.post('/api/createNewUser', {firstName:this.state.firstName,
+                                        lastName:this.state.lastName,
+                                        email:this.state.signupEmail,
+                                        password:this.state.signupPassword})
+      .then(res => {
+        console.log(res);
+      })                                  
+    } else {
+      alert("Email or password fields don't match");
+    }
   }
 
   render() {
@@ -74,7 +89,7 @@ class Login extends Component {
           <input style={{"width":"425px"}} placeholder="Password" value={this.state.signupPassword} onChange={(e) => this.handleInput(e,"signupPassword")} type="text"/>
           <br/>
           <input style={{"width":"425px"}} placeholder="Confirm Password" value={this.state.signupPasswordConfirmation} onChange={(e) => this.handleInput(e,"signupPasswordConfirmation")} type="text"/>
-          <button>Create Account</button>
+          <button onClick={this.createNewUser}>Create Account</button>
         </div>
       </section>
     );

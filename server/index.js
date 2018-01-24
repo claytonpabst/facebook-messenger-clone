@@ -42,6 +42,7 @@ var userController = require("./userController.js");
 //////////Endpoints mainController
 app.get('/api/isLoggedIn', mainController.isLoggedIn);
 app.post('/api/login', mainController.login);
+app.post('/api/createNewUser', mainController.createNewUser);
 
 //endpoints for user
 app.post('/api/getNewCorrespondent', userController.getNewCorrespondent);

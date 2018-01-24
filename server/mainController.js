@@ -32,6 +32,17 @@ mainController = {
         }else{
             return res.status(200).send({isLoggedIn: false})
         }
+    },
+    createNewUser: function(req, res){
+        const db = req.app.get('db');
+        db.createNewUser([req.body.firstName, req.body.lastName, req.body.email, req.body.password])
+        .then( response => {
+            console.log(response);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).send(err);
+        })
     }
 }
 
