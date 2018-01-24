@@ -10,7 +10,8 @@ class Conversations extends Component {
 
     this.state = {
       conversationThreads: [],
-      somethingElse: null
+      somethingElse: null,
+      searchInput: '',
     }
 
   }
@@ -53,8 +54,15 @@ class Conversations extends Component {
 
     return (
       <section className='conversations'>
+
+        <div className='search_contacts'>
+          <input className='search_input' placeholder='Search Messenger' value={this.state.searchInput} onChange={(e) => this.setState({searchInput: e.target.value})} />
+        </div>
+
         {conversationThreads}
+        
       </section>
+
     );
   }
 }
