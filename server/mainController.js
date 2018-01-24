@@ -35,9 +35,23 @@ mainController = {
     },
     createNewUser: function(req, res){
         const db = req.app.get('db');
-        db.createNewUser([req.body.firstName, req.body.lastName, req.body.email, req.body.password])
-        .then( response => {
-            console.log(response);
+        db.checkDuplicateUser([req.body.email])
+        .then( existingUser => {
+            if (existingUser[0]){
+                return res.status(200).send({success: false, message: 'The email is already in use'});
+            }
+            db.createNewUser([req.body.firstName, req.body.lastName, req.body.email, req.body.password])
+            .then( response => {
+                console.log(response);
+                req.session.isLoggedIn = true;
+                response[0].isLoggedIn=true;
+                req.session.user = response[0];
+                return res.status(200).send({success: true, message: 'Account created successfully'});
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).send(err);
+            })
         })
         .catch(err => {
             console.log(err);
@@ -46,4 +60,4 @@ mainController = {
     }
 }
 
-module.exports = mainController
+module.exports = mainController;

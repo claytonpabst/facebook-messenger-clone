@@ -49,7 +49,11 @@ class Login extends Component {
                                         email:this.state.signupEmail,
                                         password:this.state.signupPassword})
       .then(res => {
-        console.log(res);
+        alert(res.data.message);
+        if (res.data.success){
+          let newUrl = window.location.href + 'messages';
+          window.location.href = newUrl;
+        }
       })                                  
     } else {
       alert("Email or password fields don't match");
