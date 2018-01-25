@@ -66,17 +66,21 @@ class Conversations extends Component {
     .catch( err => console.log(err))
   }
 
-  startNewConversation(userInfo){
-    console.log(userInfo);
-    /* 
-      Database call here:
-        - If user clicks on their own name, maybe we can do nothing?
-        - If they click on someone they already have a conversation with, we need to move that one to the top
-        - If it's a new contact, we need to create that new conversation
-    */
-    axios.post('/api/startNewConversation', userInfo)
+  startNewConversation(newCorrespondentInfo){
+    axios.post('/api/startNewConversation', newCorrespondentInfo)
       .then( res => {
         console.log(res);
+        if (res.data.status === 'Error'){
+          // user clicked on themself
+        }else if (res.data.status === 'Update'){
+          // user clicked on someone who they already have an open thread with
+          this.setState({
+            conversationThreads: res.data.data
+          })
+          this.props.getNewConversation(newCorrespondentInfo.id)
+        }else if (res.data.status === 'Success'){
+          // new conversation thread was successfully created
+        }
       })
       .catch( err => console.log(err))
   }

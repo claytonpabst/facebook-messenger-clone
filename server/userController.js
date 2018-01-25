@@ -150,27 +150,39 @@ module.exports = {
     let userInfo = req.body;
 
     if (userInfo.id === req.session.user.id) {
-      return res.status(200).send({ message: 'User and correspondent are the same' });
+      return res.status(200).send({status: 'Error', message: 'User and correspondent are the same', data: {}});
     }
 
     db.checkExistingThread([req.session.user.id, userInfo.id])
       .then(existingThread => {
+        // If the conversation thread already exists
         if (existingThread.length) {
-          // Conversation thread already exists, and we can move it to the top here.
+          // Update user to show who their most recent correspondent is
           db.updateMostRecentCorrespondent([req.session.user.id, userInfo.id])
             .catch(err => {
               console.log(err);
               return res.status(200).send(err);
             });
-          db.updateMostRecentCorrespondent([userInfo.id, req.session.user.id])
-            .catch(err => {
+          // Update the open threads table to show that this new correspondent should be at the top (most recent)
+          db.updateOpenThreads([req.session.user.id, userInfo.id, existingThread[0].mostrecentmessage])
+            .then( success => {
+              // Once updated, get the updated list of conversation threads and send it back to the front end
+              db.getConversationThreads([req.session.user.id])
+                .then( updatedThreads => {
+                  return res.status(200).send({status: 'Update', message: 'Conversation thread already exists', data: updatedThreads});
+                })
+                .catch( err => {
+                  console.log(err);
+                  return res.status(200).send(err);
+                })
+            })
+            .catch( err => {
               console.log(err);
               return res.status(200).send(err);
-            });
-          return res.status(200).send({message: 'Conversation thread already exists'});
+            })
         } else {
           // ***********Start a new conversation thread here**********
-          return res.status(200).send({message: 'Starting new conversation thread'});
+          return res.status(200).send({status: 'Success', message: 'Starting new conversation thread', data: {}});
         }
       })
       .catch(err => {
