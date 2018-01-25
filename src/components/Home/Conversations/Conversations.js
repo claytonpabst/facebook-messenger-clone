@@ -69,17 +69,16 @@ class Conversations extends Component {
   startNewConversation(newCorrespondentInfo){
     axios.post('/api/startNewConversation', newCorrespondentInfo)
       .then( res => {
-        console.log(res);
-        if (res.data.status === 'Error'){
-          // user clicked on themself
-        }else if (res.data.status === 'Update'){
-          // user clicked on someone who they already have an open thread with
+        if (res.data.status === 'Update'){
+          // conversation thread already exists
+          this.props.getNewConversation(newCorrespondentInfo.id)
+        }
+        if (res.data.status === 'Success'){
+          // conversation threads were updated based on who user clicked on
           this.setState({
             conversationThreads: res.data.data
           })
           this.props.getNewConversation(newCorrespondentInfo.id)
-        }else if (res.data.status === 'Success'){
-          // new conversation thread was successfully created
         }
       })
       .catch( err => console.log(err))
@@ -91,7 +90,7 @@ class Conversations extends Component {
     conversationThreads = this.state.conversationThreads.length ? 
       this.state.conversationThreads.map( (item, i) => {
         let timestamp = item.timestamp.substr(5,2) + '/' + item.timestamp.substr(8,2);
-        let messagePreview = item.mostrecentmessage.length >= 40
+        let messagePreview = item.mostrecentmessage && item.mostrecentmessage.length >= 40
           ? 
           item.mostrecentmessage.substr(0,40) + '...'
           : 
