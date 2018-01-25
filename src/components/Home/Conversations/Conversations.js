@@ -66,17 +66,20 @@ class Conversations extends Component {
     .catch( err => console.log(err))
   }
 
-  startNewConversation(userInfo){
-    console.log(userInfo);
-    /* 
-      Database call here:
-        - If user clicks on their own name, maybe we can do nothing?
-        - If they click on someone they already have a conversation with, we need to move that one to the top
-        - If it's a new contact, we need to create that new conversation
-    */
-    axios.post('/api/startNewConversation', userInfo)
+  startNewConversation(newCorrespondentInfo){
+    axios.post('/api/startNewConversation', newCorrespondentInfo)
       .then( res => {
-        console.log(res);
+        if (res.data.status === 'Update'){
+          // conversation thread already exists
+          this.props.getNewConversation(newCorrespondentInfo.id)
+        }
+        if (res.data.status === 'Success'){
+          // conversation threads were updated based on who user clicked on
+          this.setState({
+            conversationThreads: res.data.data
+          })
+          this.props.getNewConversation(newCorrespondentInfo.id)
+        }
       })
       .catch( err => console.log(err))
   }
@@ -87,7 +90,7 @@ class Conversations extends Component {
     conversationThreads = this.state.conversationThreads.length ? 
       this.state.conversationThreads.map( (item, i) => {
         let timestamp = item.timestamp.substr(5,2) + '/' + item.timestamp.substr(8,2);
-        let messagePreview = item.mostrecentmessage.length >= 40
+        let messagePreview = item.mostrecentmessage && item.mostrecentmessage.length >= 40
           ? 
           item.mostrecentmessage.substr(0,40) + '...'
           : 
