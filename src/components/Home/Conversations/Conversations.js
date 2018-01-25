@@ -68,6 +68,17 @@ class Conversations extends Component {
 
   startNewConversation(userInfo){
     console.log(userInfo);
+    /* 
+      Database call here:
+        - If user clicks on their own name, maybe we can do nothing?
+        - If they click on someone they already have a conversation with, we need to move that one to the top
+        - If it's a new contact, we need to create that new conversation
+    */
+    axios.post('/api/startNewConversation', userInfo)
+      .then( res => {
+        console.log(res);
+      })
+      .catch( err => console.log(err))
   }
 
   render() {
