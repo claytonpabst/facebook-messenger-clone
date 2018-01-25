@@ -50,6 +50,7 @@ app.post('/api/getCurrentConversation', userController.getCurrentConversation);
 app.get('/api/getConversationThreads', userController.getConversationThreads);
 app.post('/api/addNewMessage', userController.addNewMessage);
 app.post('/api/getSearchResults', userController.getSearchResults);
+app.post('/api/startNewConversation', userController.startNewConversation);
 
 
 

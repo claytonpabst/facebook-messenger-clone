@@ -16,6 +16,8 @@ class Conversations extends Component {
       searchResults: [],
     }
 
+    this.toggleSearchResults = this.toggleSearchResults.bind(this);
+    this.startNewConversation = this.startNewConversation.bind(this);
   }
 
   componentDidMount(){
@@ -35,12 +37,22 @@ class Conversations extends Component {
   }
 
   toggleSearchResults(newVal){
-    this.setState({
-      showSearchResults: newVal,
-      searchInput: ''
-    })
-    if (newVal === true){
+    if (newVal){
+      // If we are setting newVal to true, we want to get search results from DB and show them
+      this.setState({
+        showSearchResults: true,
+        searchInput: ''
+      })
       this.getSearchResults();
+    }else{
+      // Otherwise, hide the search results. The 200 ms timeout allows someone to click on a search result
+      // to start a new conversation thread before the search results lose focus and disappear
+      setTimeout( () => {
+        this.setState({
+          showSearchResults: false,
+          searchInput: ''
+        })
+      }, 200)
     }
   }
 
@@ -52,6 +64,21 @@ class Conversations extends Component {
       })
     })
     .catch( err => console.log(err))
+  }
+
+  startNewConversation(userInfo){
+    console.log(userInfo);
+    /* 
+      Database call here:
+        - If user clicks on their own name, maybe we can do nothing?
+        - If they click on someone they already have a conversation with, we need to move that one to the top
+        - If it's a new contact, we need to create that new conversation
+    */
+    axios.post('/api/startNewConversation', userInfo)
+      .then( res => {
+        console.log(res);
+      })
+      .catch( err => console.log(err))
   }
 
   render() {
@@ -86,7 +113,7 @@ class Conversations extends Component {
           this.state.searchResults.length ?
             this.state.searchResults.map( (item,i) => {
               return (
-                <div className='result' key={i}>
+                <div className='result' key={i} onClick={() => this.startNewConversation(item)}>
                   <img src={item.imageurl} alt='contact thumbnail' className='result_img' />
                   <p className='result_p'>{item.firstname} {item.lastname}</p>
                 </div>
