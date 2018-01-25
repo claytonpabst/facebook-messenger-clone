@@ -169,6 +169,8 @@ module.exports = {
             .catch( err => res.status(200).send(err))
           // Start a new conversation thread
           let {id, imageurl, firstname, lastname} = newCorrespondentInfo;
+          db.startNewConversation([id, req.session.user.id, req.session.user.imageurl, req.session.user.firstname, req.session.user.lastname])
+            .catch(err => res.status(200).send(err));
           db.startNewConversation([req.session.user.id, id, imageurl, firstname, lastname])
           .then( success => {
             // Once started, get the updated list of conversation threads and send it back to the front end
